@@ -11,7 +11,7 @@ class TopModule extends RawModule {
 
   val led =
     withClockAndReset(io.pll_inst1_CLKOUT0, !io.pll_inst1_LOCKED) {
-      Module(new TrafficLight)
+      Module(new TrafficLight(100_000_000))
     }
 
   io.led_data := false.B ## false.B ## !led.io.ns_red ## !led.io.ns_yellow ## !led.io.ns_green ## !led.io.we_red ## !led.io.we_yellow ## !led.io.we_green
