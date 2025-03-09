@@ -1,7 +1,5 @@
 #include "VTrafficLight.h"
 #include "verilatedos.h"
-#include <cstdlib>
-#include <stdlib.h>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 
