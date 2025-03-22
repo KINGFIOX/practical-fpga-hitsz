@@ -80,6 +80,44 @@ void read_with_wait1(VApbSlaveMemory *dut) {
   }
 }
 
+void read_and_write(VApbSlaveMemory *dut) {
+  int addr = 2;
+  int base = 0;
+  // write
+  if (clk_time == 1 + base) {
+    dut->io_sel = 1;
+    dut->io_write = 1;
+    dut->io_addr = addr;
+    dut->io_wdata = random();
+  }
+  if (clk_time == 2 + base) {
+    dut->io_enable = 1;
+  }
+  if (clk_time == 3 + base) {
+    dut->io_sel = 0;
+    dut->io_enable = 0;
+    dut->io_wdata = 0;
+  }
+
+  // read
+  base = 40;
+  if (clk_time == 0 + base) {
+    dut->io_write = 1;
+  }
+  if (clk_time == 1 + base) {
+    dut->io_addr = addr;
+    dut->io_write = 0;
+    dut->io_sel = 1;
+  }
+  if (clk_time == 2 + base) {
+    dut->io_enable = 1;
+  }
+  if (clk_time == 3 + base) {
+    dut->io_sel = 0;
+    dut->io_enable = 0;
+  }
+}
+
 void read_with_wait2(VApbSlaveMemory *dut) {
   if (clk_time == 0) {
     dut->io_write = 1;
@@ -113,17 +151,19 @@ void combinational(VApbSlaveMemory *dut) {
   }
   if (dut->io_bram_re) {
     dut->io_bram_rdata_b = data[MASK(dut->io_bram_raddr)];
-    printf("%2d: read %d from %d\n", clk_time, dut->io_rdata,
-           dut->io_bram_raddr);
+    printf("%2d: read %d from %d\n", clk_time, dut->io_bram_rdata_b,
+           MASK(dut->io_bram_raddr));
   }
   if (dut->io_bram_we) {
     data[MASK(dut->io_bram_waddr)] = dut->io_bram_wdata_a;
+    printf("%2d: write %d to %d\n", clk_time, dut->io_bram_wdata_a,
+           MASK(dut->io_bram_waddr));
   }
 }
 
 void simulate(VApbSlaveMemory *dut, VerilatedVcdC *m_trace,
               void (*drive)(VApbSlaveMemory *)) {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 200; i++) {
     for (int j = 0; j < 2; j++) {
       dut->clock ^= 1;
       if (j == 0) {         // posedge
@@ -146,7 +186,7 @@ int main(int argc, char **argv, char **env) {
   VerilatedVcdC *m_trace = new VerilatedVcdC;
   dut->trace(m_trace, -1);
   m_trace->open("waveform.vcd");
-  simulate(dut, m_trace, read_with_wait1);
+  simulate(dut, m_trace, read_and_write);
   m_trace->close();
   delete dut;
   exit(EXIT_SUCCESS);
