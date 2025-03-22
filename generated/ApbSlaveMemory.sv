@@ -10,40 +10,50 @@ module ApbSlaveMemory(
   output        io_ready,
   output [31:0] io_rdata,
   output        io_error,
-                io_bram_clk,
-                io_bram_reset,
                 io_bram_re,
-  output [5:0]  io_bram_raddr,
+  output [6:0]  io_bram_raddr,
   input  [31:0] io_bram_rdata_b,
   output        io_bram_we,
-  output [5:0]  io_bram_waddr,
+  output [6:0]  io_bram_waddr,
   output [31:0] io_bram_wdata_a
 );
 
   reg  [1:0] state;
+  reg        bram_we;
+  reg        bram_re;
   wire       _GEN = state == 2'h0;
   wire       _GEN_0 = state == 2'h1;
-  wire       _GEN_1 = _GEN | ~_GEN_0;
-  wire       _GEN_2 = state == 2'h2;
-  wire       _GEN_3 = _GEN | _GEN_0;
+  wire       _GEN_1 = state == 2'h2;
   always @(posedge clock) begin
-    if (reset)
+    if (reset) begin
       state <= 2'h0;
+      bram_we <= 1'h0;
+      bram_re <= 1'h0;
+    end
     else begin
-      automatic logic [3:0][1:0] _GEN_4 =
-        {{state}, {{1'h0, io_sel}}, {2'h2}, {io_sel ? 2'h1 : state}};
-      state <= _GEN_4[state];
+      automatic logic [3:0][1:0] _GEN_2 =
+        {{state}, {io_enable ? 2'h2 : {1'h0, io_sel}}, {2'h2}, {io_sel ? 2'h1 : state}};
+      state <= _GEN_2[state];
+      if (~_GEN) begin
+        if (_GEN_0) begin
+          bram_we <= io_write;
+          bram_re <= ~io_write;
+        end
+        else begin
+          automatic logic _GEN_3 = ~_GEN_1 | io_enable;
+          bram_we <= _GEN_3 & bram_we;
+          bram_re <= _GEN_3 & bram_re;
+        end
+      end
     end
   end // always @(posedge)
-  assign io_ready = _GEN_3 | ~_GEN_2;
+  assign io_ready = _GEN | _GEN_0 | ~_GEN_1;
   assign io_rdata = io_bram_rdata_b;
-  assign io_error = ~_GEN_3 & _GEN_2 & ~io_enable;
-  assign io_bram_clk = clock;
-  assign io_bram_reset = reset;
-  assign io_bram_re = io_enable;
-  assign io_bram_raddr = io_addr[5:0];
-  assign io_bram_we = 1'h0;
-  assign io_bram_waddr = _GEN_1 ? 6'h0 : io_addr[5:0];
-  assign io_bram_wdata_a = _GEN_1 ? 32'h0 : io_wdata;
+  assign io_error = 1'h0;
+  assign io_bram_re = bram_re;
+  assign io_bram_raddr = io_addr[6:0];
+  assign io_bram_we = bram_we;
+  assign io_bram_waddr = io_addr[6:0];
+  assign io_bram_wdata_a = io_wdata;
 endmodule
 
