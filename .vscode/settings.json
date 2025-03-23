@@ -1,5 +1,8 @@
 {
     "files.watcherExclude": {
         "**/target": true
+    },
+    "terminal.integrated.env.linux": {
+        "CHISEL_FIRTOOL_PATH": "/usr/bin"
     }
 }
