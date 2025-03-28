@@ -12,15 +12,523 @@ module ApbSlaveMemory(
   output        io_error
 );
 
-  reg [31:0] reg_0;
+  reg  [31:0]        reg_0;
+  reg  [31:0]        reg_1;
+  reg  [31:0]        reg_2;
+  reg  [31:0]        reg_3;
+  reg  [31:0]        reg_4;
+  reg  [31:0]        reg_5;
+  reg  [31:0]        reg_6;
+  reg  [31:0]        reg_7;
+  reg  [31:0]        reg_8;
+  reg  [31:0]        reg_9;
+  reg  [31:0]        reg_10;
+  reg  [31:0]        reg_11;
+  reg  [31:0]        reg_12;
+  reg  [31:0]        reg_13;
+  reg  [31:0]        reg_14;
+  reg  [31:0]        reg_15;
+  reg  [31:0]        reg_16;
+  reg  [31:0]        reg_17;
+  reg  [31:0]        reg_18;
+  reg  [31:0]        reg_19;
+  reg  [31:0]        reg_20;
+  reg  [31:0]        reg_21;
+  reg  [31:0]        reg_22;
+  reg  [31:0]        reg_23;
+  reg  [31:0]        reg_24;
+  reg  [31:0]        reg_25;
+  reg  [31:0]        reg_26;
+  reg  [31:0]        reg_27;
+  reg  [31:0]        reg_28;
+  reg  [31:0]        reg_29;
+  reg  [31:0]        reg_30;
+  reg  [31:0]        reg_31;
+  reg  [31:0]        reg_32;
+  reg  [31:0]        reg_33;
+  reg  [31:0]        reg_34;
+  reg  [31:0]        reg_35;
+  reg  [31:0]        reg_36;
+  reg  [31:0]        reg_37;
+  reg  [31:0]        reg_38;
+  reg  [31:0]        reg_39;
+  reg  [31:0]        reg_40;
+  reg  [31:0]        reg_41;
+  reg  [31:0]        reg_42;
+  reg  [31:0]        reg_43;
+  reg  [31:0]        reg_44;
+  reg  [31:0]        reg_45;
+  reg  [31:0]        reg_46;
+  reg  [31:0]        reg_47;
+  reg  [31:0]        reg_48;
+  reg  [31:0]        reg_49;
+  reg  [31:0]        reg_50;
+  reg  [31:0]        reg_51;
+  reg  [31:0]        reg_52;
+  reg  [31:0]        reg_53;
+  reg  [31:0]        reg_54;
+  reg  [31:0]        reg_55;
+  reg  [31:0]        reg_56;
+  reg  [31:0]        reg_57;
+  reg  [31:0]        reg_58;
+  reg  [31:0]        reg_59;
+  reg  [31:0]        reg_60;
+  reg  [31:0]        reg_61;
+  reg  [31:0]        reg_62;
+  reg  [31:0]        reg_63;
+  reg  [31:0]        reg_64;
+  reg  [31:0]        reg_65;
+  reg  [31:0]        reg_66;
+  reg  [31:0]        reg_67;
+  reg  [31:0]        reg_68;
+  reg  [31:0]        reg_69;
+  reg  [31:0]        reg_70;
+  reg  [31:0]        reg_71;
+  reg  [31:0]        reg_72;
+  reg  [31:0]        reg_73;
+  reg  [31:0]        reg_74;
+  reg  [31:0]        reg_75;
+  reg  [31:0]        reg_76;
+  reg  [31:0]        reg_77;
+  reg  [31:0]        reg_78;
+  reg  [31:0]        reg_79;
+  reg  [31:0]        reg_80;
+  reg  [31:0]        reg_81;
+  reg  [31:0]        reg_82;
+  reg  [31:0]        reg_83;
+  reg  [31:0]        reg_84;
+  reg  [31:0]        reg_85;
+  reg  [31:0]        reg_86;
+  reg  [31:0]        reg_87;
+  reg  [31:0]        reg_88;
+  reg  [31:0]        reg_89;
+  reg  [31:0]        reg_90;
+  reg  [31:0]        reg_91;
+  reg  [31:0]        reg_92;
+  reg  [31:0]        reg_93;
+  reg  [31:0]        reg_94;
+  reg  [31:0]        reg_95;
+  reg  [31:0]        reg_96;
+  reg  [31:0]        reg_97;
+  reg  [31:0]        reg_98;
+  reg  [31:0]        reg_99;
+  reg  [31:0]        reg_100;
+  reg  [31:0]        reg_101;
+  reg  [31:0]        reg_102;
+  reg  [31:0]        reg_103;
+  reg  [31:0]        reg_104;
+  reg  [31:0]        reg_105;
+  reg  [31:0]        reg_106;
+  reg  [31:0]        reg_107;
+  reg  [31:0]        reg_108;
+  reg  [31:0]        reg_109;
+  reg  [31:0]        reg_110;
+  reg  [31:0]        reg_111;
+  reg  [31:0]        reg_112;
+  reg  [31:0]        reg_113;
+  reg  [31:0]        reg_114;
+  reg  [31:0]        reg_115;
+  reg  [31:0]        reg_116;
+  reg  [31:0]        reg_117;
+  reg  [31:0]        reg_118;
+  reg  [31:0]        reg_119;
+  reg  [31:0]        reg_120;
+  reg  [31:0]        reg_121;
+  reg  [31:0]        reg_122;
+  reg  [31:0]        reg_123;
+  reg  [31:0]        reg_124;
+  reg  [31:0]        reg_125;
+  reg  [31:0]        reg_126;
+  reg  [31:0]        reg_127;
+  wire [127:0][31:0] _GEN =
+    {{reg_127},
+     {reg_126},
+     {reg_125},
+     {reg_124},
+     {reg_123},
+     {reg_122},
+     {reg_121},
+     {reg_120},
+     {reg_119},
+     {reg_118},
+     {reg_117},
+     {reg_116},
+     {reg_115},
+     {reg_114},
+     {reg_113},
+     {reg_112},
+     {reg_111},
+     {reg_110},
+     {reg_109},
+     {reg_108},
+     {reg_107},
+     {reg_106},
+     {reg_105},
+     {reg_104},
+     {reg_103},
+     {reg_102},
+     {reg_101},
+     {reg_100},
+     {reg_99},
+     {reg_98},
+     {reg_97},
+     {reg_96},
+     {reg_95},
+     {reg_94},
+     {reg_93},
+     {reg_92},
+     {reg_91},
+     {reg_90},
+     {reg_89},
+     {reg_88},
+     {reg_87},
+     {reg_86},
+     {reg_85},
+     {reg_84},
+     {reg_83},
+     {reg_82},
+     {reg_81},
+     {reg_80},
+     {reg_79},
+     {reg_78},
+     {reg_77},
+     {reg_76},
+     {reg_75},
+     {reg_74},
+     {reg_73},
+     {reg_72},
+     {reg_71},
+     {reg_70},
+     {reg_69},
+     {reg_68},
+     {reg_67},
+     {reg_66},
+     {reg_65},
+     {reg_64},
+     {reg_63},
+     {reg_62},
+     {reg_61},
+     {reg_60},
+     {reg_59},
+     {reg_58},
+     {reg_57},
+     {reg_56},
+     {reg_55},
+     {reg_54},
+     {reg_53},
+     {reg_52},
+     {reg_51},
+     {reg_50},
+     {reg_49},
+     {reg_48},
+     {reg_47},
+     {reg_46},
+     {reg_45},
+     {reg_44},
+     {reg_43},
+     {reg_42},
+     {reg_41},
+     {reg_40},
+     {reg_39},
+     {reg_38},
+     {reg_37},
+     {reg_36},
+     {reg_35},
+     {reg_34},
+     {reg_33},
+     {reg_32},
+     {reg_31},
+     {reg_30},
+     {reg_29},
+     {reg_28},
+     {reg_27},
+     {reg_26},
+     {reg_25},
+     {reg_24},
+     {reg_23},
+     {reg_22},
+     {reg_21},
+     {reg_20},
+     {reg_19},
+     {reg_18},
+     {reg_17},
+     {reg_16},
+     {reg_15},
+     {reg_14},
+     {reg_13},
+     {reg_12},
+     {reg_11},
+     {reg_10},
+     {reg_9},
+     {reg_8},
+     {reg_7},
+     {reg_6},
+     {reg_5},
+     {reg_4},
+     {reg_3},
+     {reg_2},
+     {reg_1},
+     {reg_0}};
   always @(posedge clock) begin
-    if (reset)
-      reg_0 <= 32'h0;
-    else if (io_write)
+    if (io_sel & io_write & io_addr[6:0] == 7'h0)
       reg_0 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1)
+      reg_1 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2)
+      reg_2 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3)
+      reg_3 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4)
+      reg_4 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5)
+      reg_5 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6)
+      reg_6 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h7)
+      reg_7 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h8)
+      reg_8 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h9)
+      reg_9 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'hA)
+      reg_10 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'hB)
+      reg_11 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'hC)
+      reg_12 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'hD)
+      reg_13 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'hE)
+      reg_14 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'hF)
+      reg_15 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h10)
+      reg_16 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h11)
+      reg_17 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h12)
+      reg_18 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h13)
+      reg_19 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h14)
+      reg_20 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h15)
+      reg_21 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h16)
+      reg_22 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h17)
+      reg_23 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h18)
+      reg_24 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h19)
+      reg_25 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1A)
+      reg_26 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1B)
+      reg_27 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1C)
+      reg_28 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1D)
+      reg_29 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1E)
+      reg_30 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h1F)
+      reg_31 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h20)
+      reg_32 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h21)
+      reg_33 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h22)
+      reg_34 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h23)
+      reg_35 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h24)
+      reg_36 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h25)
+      reg_37 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h26)
+      reg_38 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h27)
+      reg_39 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h28)
+      reg_40 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h29)
+      reg_41 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2A)
+      reg_42 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2B)
+      reg_43 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2C)
+      reg_44 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2D)
+      reg_45 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2E)
+      reg_46 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h2F)
+      reg_47 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h30)
+      reg_48 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h31)
+      reg_49 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h32)
+      reg_50 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h33)
+      reg_51 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h34)
+      reg_52 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h35)
+      reg_53 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h36)
+      reg_54 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h37)
+      reg_55 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h38)
+      reg_56 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h39)
+      reg_57 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3A)
+      reg_58 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3B)
+      reg_59 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3C)
+      reg_60 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3D)
+      reg_61 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3E)
+      reg_62 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h3F)
+      reg_63 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h40)
+      reg_64 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h41)
+      reg_65 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h42)
+      reg_66 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h43)
+      reg_67 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h44)
+      reg_68 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h45)
+      reg_69 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h46)
+      reg_70 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h47)
+      reg_71 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h48)
+      reg_72 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h49)
+      reg_73 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4A)
+      reg_74 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4B)
+      reg_75 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4C)
+      reg_76 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4D)
+      reg_77 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4E)
+      reg_78 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h4F)
+      reg_79 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h50)
+      reg_80 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h51)
+      reg_81 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h52)
+      reg_82 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h53)
+      reg_83 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h54)
+      reg_84 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h55)
+      reg_85 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h56)
+      reg_86 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h57)
+      reg_87 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h58)
+      reg_88 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h59)
+      reg_89 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5A)
+      reg_90 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5B)
+      reg_91 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5C)
+      reg_92 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5D)
+      reg_93 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5E)
+      reg_94 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h5F)
+      reg_95 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h60)
+      reg_96 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h61)
+      reg_97 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h62)
+      reg_98 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h63)
+      reg_99 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h64)
+      reg_100 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h65)
+      reg_101 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h66)
+      reg_102 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h67)
+      reg_103 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h68)
+      reg_104 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h69)
+      reg_105 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6A)
+      reg_106 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6B)
+      reg_107 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6C)
+      reg_108 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6D)
+      reg_109 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6E)
+      reg_110 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h6F)
+      reg_111 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h70)
+      reg_112 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h71)
+      reg_113 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h72)
+      reg_114 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h73)
+      reg_115 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h74)
+      reg_116 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h75)
+      reg_117 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h76)
+      reg_118 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h77)
+      reg_119 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h78)
+      reg_120 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h79)
+      reg_121 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h7A)
+      reg_122 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h7B)
+      reg_123 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h7C)
+      reg_124 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h7D)
+      reg_125 <= io_wdata;
+    if (io_sel & io_write & io_addr[6:0] == 7'h7E)
+      reg_126 <= io_wdata;
+    if (io_sel & io_write & (&(io_addr[6:0])))
+      reg_127 <= io_wdata;
   end // always @(posedge)
   assign io_ready = 1'h1;
-  assign io_rdata = reg_0;
+  assign io_rdata = _GEN[io_addr[6:0]];
   assign io_error = 1'h0;
 endmodule
 

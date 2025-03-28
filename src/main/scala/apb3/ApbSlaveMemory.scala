@@ -48,26 +48,40 @@ class ApbSlaveMemory extends Module {
   state := state_next
 
   // ready logic
-  // io.ready := MuxCase(
-  //   io.write,
-  //   Seq(
-  //     (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.IDLE) -> io.write,
-  //     (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.ACCESS) -> !io.write,
-  //     (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.SETUP) -> io.write
-  //   )
-  // )
-  io.ready := true.B
+  io.ready := Mux(
+    !io.write,
+    true.B, // read always ready
+    MuxCase(
+      true.B,
+      Seq(
+        (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.IDLE) -> true.B,
+        (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.ACCESS) -> false.B,
+        (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.SETUP) -> true.B
+      )
+    )
+  )
 
   // error logic (ignore)
   io.error := false.B
 
-  val reg = RegInit(0.U(32.W))
+  val addr = io.addr(6, 0)
 
-  when(io.write) {
-    reg := io.wdata
+  // resource
+  val reg = Reg(Vec(128, UInt(32.W)))
+  val addr_r = RegInit(0.U(7.W))
+  io.rdata := reg(addr_r)
+
+  // lock
+  when(state === ApbSlaveMemoryEnum.SETUP) {
+    addr_r := addr
+    when(io.sel) {
+      when(io.write) {
+        reg(addr) := io.wdata
+      }
+    }
   }
-  io.rdata := reg
 
+  // memory
 }
 
 // _root_ disambiguates from package chisel3.util.circt if user imports chisel3.util._
