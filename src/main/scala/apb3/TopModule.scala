@@ -57,7 +57,7 @@ import _root_.circt.stage.ChiselStage
 
 /** Generate Verilog sources and save it in file GCD.v
   */
-object apb_slave_memory extends App {
+object TopModule extends App {
   ChiselStage.emitSystemVerilogFile(
     new TopModule,
     Array("--target-dir", "generated"),

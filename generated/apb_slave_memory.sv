@@ -17,36 +17,43 @@ module ApbSlaveMemory(
   output [31:0] io_bram_wdata_a
 );
 
-  reg  [1:0] state;
-  reg        bram_we;
-  reg        bram_re;
-  wire       _GEN = state == 2'h0;
-  wire       _GEN_0 = state == 2'h1;
-  wire       _GEN_1 = state != 2'h2;
+  reg  [15:0] addr;
+  reg  [31:0] wdata;
+  reg         write;
+  reg  [1:0]  state;
+  wire        _GEN = state == 2'h0;
+  wire        _GEN_0 = state == 2'h1;
+  wire        _GEN_1 = state == 2'h2;
+  wire        _GEN_2 = _GEN | _GEN_0;
+  wire        _GEN_3 = _GEN_2 | ~_GEN_1;
+  wire [6:0]  io_bram_waddr_0 = _GEN_3 ? 7'h0 : addr[6:0];
   always @(posedge clock) begin
     if (reset) begin
+      addr <= 16'h0;
+      wdata <= 32'h0;
+      write <= 1'h0;
       state <= 2'h0;
-      bram_we <= 1'h0;
-      bram_re <= 1'h0;
     end
     else begin
-      automatic logic [3:0][1:0] _GEN_2 =
+      automatic logic [3:0][1:0] _GEN_4 =
         {{state}, {io_enable ? 2'h2 : {1'h0, io_sel}}, {2'h2}, {io_sel ? 2'h1 : state}};
-      state <= _GEN_2[state];
-      if (~_GEN) begin
-        automatic logic _GEN_3 = _GEN_1 | io_enable;
-        bram_we <= _GEN_0 ? io_write : _GEN_3 & bram_we;
-        bram_re <= _GEN_0 ? ~io_write : _GEN_3 & bram_re;
+      if (_GEN | ~_GEN_0) begin
       end
+      else begin
+        addr <= io_addr;
+        wdata <= io_wdata;
+        write <= io_write;
+      end
+      state <= _GEN_4[state];
     end
   end // always @(posedge)
-  assign io_ready = _GEN | _GEN_0 | _GEN_1;
-  assign io_rdata = io_bram_rdata_b;
-  assign io_bram_re = bram_re;
-  assign io_bram_raddr = io_addr[6:0];
-  assign io_bram_we = bram_we;
-  assign io_bram_waddr = io_addr[6:0];
-  assign io_bram_wdata_a = io_wdata;
+  assign io_ready = _GEN_2 | state != 2'h2;
+  assign io_rdata = _GEN_3 ? 32'h1 : io_bram_rdata_b;
+  assign io_bram_re = ~_GEN_2 & _GEN_1 & ~write;
+  assign io_bram_raddr = io_bram_waddr_0;
+  assign io_bram_we = ~_GEN_2 & _GEN_1 & write;
+  assign io_bram_waddr = io_bram_waddr_0;
+  assign io_bram_wdata_a = _GEN_3 ? 32'h0 : wdata;
 endmodule
 
 module apb_slave_memory(

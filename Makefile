@@ -7,3 +7,6 @@ build: generated/ApbSlaveMemory.sv src/test/cxx/main.cxx
 
 sim: build
 	./build/sim
+
+top:
+	sbt 'runMain apb3.TopModule'
