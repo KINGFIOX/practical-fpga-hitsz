@@ -33,13 +33,13 @@ class ApbSlaveMemory extends Module {
 
   // write
   io.bram.we := false.B
-  io.bram.waddr := 0.U
-  io.bram.wdata_a := 0.U
+  io.bram.waddr := addr
+  io.bram.wdata_a := wdata
 
   // read
-  io.bram.re := false.B
-  io.bram.raddr := 0.U
-  io.rdata := 1.U
+  io.bram.re := !write
+  io.bram.raddr := addr
+  io.rdata := io.bram.rdata_b
 
   val state = RegInit(ApbSlaveMemoryEnum.IDLE)
 
@@ -61,15 +61,8 @@ class ApbSlaveMemory extends Module {
     is(ApbSlaveMemoryEnum.ACCESS) {
       io.ready := false.B // 从设备保持为低电平, 则外围总线保持 access 状态
 
-      // write
       io.bram.we := write
-      io.bram.waddr := addr
-      io.bram.wdata_a := wdata
 
-      // read
-      io.bram.re := !write
-      io.bram.raddr := addr
-      io.rdata := io.bram.rdata_b
       when(io.enable) { // enable 高电平时, 延长传输, 确保两个周期以上的传输可以顺利进行
         state := ApbSlaveMemoryEnum.ACCESS
       }.otherwise {

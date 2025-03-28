@@ -23,10 +23,7 @@ module ApbSlaveMemory(
   reg  [1:0]  state;
   wire        _GEN = state == 2'h0;
   wire        _GEN_0 = state == 2'h1;
-  wire        _GEN_1 = state == 2'h2;
-  wire        _GEN_2 = _GEN | _GEN_0;
-  wire        _GEN_3 = _GEN_2 | ~_GEN_1;
-  wire [6:0]  io_bram_waddr_0 = _GEN_3 ? 7'h0 : addr[6:0];
+  wire        _GEN_1 = _GEN | _GEN_0;
   always @(posedge clock) begin
     if (reset) begin
       addr <= 16'h0;
@@ -35,7 +32,7 @@ module ApbSlaveMemory(
       state <= 2'h0;
     end
     else begin
-      automatic logic [3:0][1:0] _GEN_4 =
+      automatic logic [3:0][1:0] _GEN_2 =
         {{state}, {io_enable ? 2'h2 : {1'h0, io_sel}}, {2'h2}, {io_sel ? 2'h1 : state}};
       if (_GEN | ~_GEN_0) begin
       end
@@ -44,21 +41,21 @@ module ApbSlaveMemory(
         wdata <= io_wdata;
         write <= io_write;
       end
-      state <= _GEN_4[state];
+      state <= _GEN_2[state];
     end
   end // always @(posedge)
-  assign io_ready = _GEN_2 | state != 2'h2;
-  assign io_rdata = _GEN_3 ? 32'h1 : io_bram_rdata_b;
-  assign io_bram_re = ~_GEN_2 & _GEN_1 & ~write;
-  assign io_bram_raddr = io_bram_waddr_0;
-  assign io_bram_we = ~_GEN_2 & _GEN_1 & write;
-  assign io_bram_waddr = io_bram_waddr_0;
-  assign io_bram_wdata_a = _GEN_3 ? 32'h0 : wdata;
+  assign io_ready = _GEN_1 | state != 2'h2;
+  assign io_rdata = io_bram_rdata_b;
+  assign io_bram_re = ~write;
+  assign io_bram_raddr = addr[6:0];
+  assign io_bram_we = ~_GEN_1 & state == 2'h2 & write;
+  assign io_bram_waddr = addr[6:0];
+  assign io_bram_wdata_a = wdata;
 endmodule
 
 module apb_slave_memory(
-  input         clk,
-                reset_n,
+  input         clock,
+                reset,
   input  [15:0] io_apbSlave_0_PADDR,
   input         io_apbSlave_0_PSEL,
                 io_apbSlave_0_PENABLE,
@@ -76,8 +73,8 @@ module apb_slave_memory(
   wire [6:0]  _impl_io_bram_waddr;
   wire [31:0] _impl_io_bram_wdata_a;
   ApbSlaveMemory impl (
-    .clock           (clk),
-    .reset           (~reset_n),
+    .clock           (clock),
+    .reset           (reset),
     .io_addr         (io_apbSlave_0_PADDR),
     .io_sel          (io_apbSlave_0_PSEL),
     .io_enable       (io_apbSlave_0_PENABLE),
@@ -93,8 +90,8 @@ module apb_slave_memory(
     .io_bram_wdata_a (_impl_io_bram_wdata_a)
   );
   bram bram_test (
-    .clk     (clk),
-    .reset   (~reset_n),
+    .clk     (clock),
+    .reset   (reset),
     .re      (_impl_io_bram_re),
     .raddr   (_impl_io_bram_raddr),
     .rdata_b (_bram_test_rdata_b),

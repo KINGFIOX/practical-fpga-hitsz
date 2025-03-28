@@ -2,12 +2,10 @@ package apb3
 
 import chisel3._
 
-class TopModule extends RawModule {
+class TopModule extends Module {
   override def desiredName = "apb_slave_memory"
 
   val io = FlatIO(new Bundle {
-    val clk = Input(Clock())
-    val reset_n = Input(Bool())
     val io_apbSlave_0_PADDR = Input(UInt(16.W))
     val io_apbSlave_0_PSEL = Input(Bool())
     val io_apbSlave_0_PENABLE = Input(Bool())
@@ -18,13 +16,8 @@ class TopModule extends RawModule {
     val io_apbSlave_0_PSLVERROR = Output(Bool())
   })
 
-  val rst = !io.reset_n
-  val clk = io.clk
-
   // Initialize outputs with default values
-  val impl = withClockAndReset(clk, rst) {
-    Module(new ApbSlaveMemory)
-  }
+  val impl = Module(new ApbSlaveMemory)
 
   impl.io.addr := io.io_apbSlave_0_PADDR
   impl.io.sel := io.io_apbSlave_0_PSEL
@@ -35,12 +28,10 @@ class TopModule extends RawModule {
   io.io_apbSlave_0_PRDATA := impl.io.rdata
   io.io_apbSlave_0_PSLVERROR := impl.io.error
 
-  val bram_test = withClockAndReset(clk, rst) {
-    Module(new Bram)
-  }
+  val bram_test = Module(new Bram)
 
-  bram_test.io.reset := rst
-  bram_test.io.clk := clk
+  bram_test.io.reset := reset
+  bram_test.io.clk := clock
 
   // impl.io.bram <> bram_test.io.bits
   bram_test.io.re := impl.io.bram.re
