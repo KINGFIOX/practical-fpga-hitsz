@@ -13,8 +13,10 @@ class BramBundle extends Bundle {
 
 class Bram extends BlackBox {
   val io = IO(new Bundle {
-    val bits = new BramBundle
     val clk = Input(Clock())
     val reset = Input(Bool())
+    val bits = new BramBundle
   })
+
+  override def desiredName = "bram"
 }
