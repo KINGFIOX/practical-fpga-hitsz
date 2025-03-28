@@ -52,17 +52,17 @@ endmodule
 module apb_slave_memory(
   input         clk,
                 reset_n,
-  input  [15:0] bits_io_apbSlave_0_PADDR,
-  input         bits_io_apbSlave_0_PSEL,
-                bits_io_apbSlave_0_PENABLE,
-                bits_io_apbSlave_0_PWRITE,
-  input  [31:0] bits_io_apbSlave_0_PWDATA,
-  output        bits_io_apbSlave_0_PREADY,
-  output [31:0] bits_io_apbSlave_0_PRDATA,
-  output        bits_io_apbSlave_0_PSLVERROR
+  input  [15:0] io_apbSlave_0_PADDR,
+  input         io_apbSlave_0_PSEL,
+                io_apbSlave_0_PENABLE,
+                io_apbSlave_0_PWRITE,
+  input  [31:0] io_apbSlave_0_PWDATA,
+  output        io_apbSlave_0_PREADY,
+  output [31:0] io_apbSlave_0_PRDATA,
+  output        io_apbSlave_0_PSLVERROR
 );
 
-  wire [31:0] _bram_test_bits_rdata_b;
+  wire [31:0] _bram_test_rdata_b;
   wire        _impl_io_bram_re;
   wire [6:0]  _impl_io_bram_raddr;
   wire        _impl_io_bram_we;
@@ -71,30 +71,30 @@ module apb_slave_memory(
   ApbSlaveMemory impl (
     .clock           (clk),
     .reset           (~reset_n),
-    .io_addr         (bits_io_apbSlave_0_PADDR),
-    .io_sel          (bits_io_apbSlave_0_PSEL),
-    .io_enable       (bits_io_apbSlave_0_PENABLE),
-    .io_write        (bits_io_apbSlave_0_PWRITE),
-    .io_wdata        (bits_io_apbSlave_0_PWDATA),
-    .io_ready        (bits_io_apbSlave_0_PREADY),
-    .io_rdata        (bits_io_apbSlave_0_PRDATA),
+    .io_addr         (io_apbSlave_0_PADDR),
+    .io_sel          (io_apbSlave_0_PSEL),
+    .io_enable       (io_apbSlave_0_PENABLE),
+    .io_write        (io_apbSlave_0_PWRITE),
+    .io_wdata        (io_apbSlave_0_PWDATA),
+    .io_ready        (io_apbSlave_0_PREADY),
+    .io_rdata        (io_apbSlave_0_PRDATA),
     .io_bram_re      (_impl_io_bram_re),
     .io_bram_raddr   (_impl_io_bram_raddr),
-    .io_bram_rdata_b (_bram_test_bits_rdata_b),
+    .io_bram_rdata_b (_bram_test_rdata_b),
     .io_bram_we      (_impl_io_bram_we),
     .io_bram_waddr   (_impl_io_bram_waddr),
     .io_bram_wdata_a (_impl_io_bram_wdata_a)
   );
   bram bram_test (
-    .clk          (clk),
-    .reset        (~reset_n),
-    .bits_re      (_impl_io_bram_re),
-    .bits_raddr   (_impl_io_bram_raddr),
-    .bits_rdata_b (_bram_test_bits_rdata_b),
-    .bits_we      (_impl_io_bram_we),
-    .bits_waddr   (_impl_io_bram_waddr),
-    .bits_wdata_a (_impl_io_bram_wdata_a)
+    .clk     (clk),
+    .reset   (~reset_n),
+    .re      (_impl_io_bram_re),
+    .raddr   (_impl_io_bram_raddr),
+    .rdata_b (_bram_test_rdata_b),
+    .we      (_impl_io_bram_we),
+    .waddr   (_impl_io_bram_waddr),
+    .wdata_a (_impl_io_bram_wdata_a)
   );
-  assign bits_io_apbSlave_0_PSLVERROR = 1'h0;
+  assign io_apbSlave_0_PSLVERROR = 1'h0;
 endmodule
 
