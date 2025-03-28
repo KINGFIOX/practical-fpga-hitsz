@@ -8,49 +8,819 @@ module ApbSlaveMemory(
                 io_write,
   input  [31:0] io_wdata,
   output        io_ready,
-  output [31:0] io_rdata,
-  output        io_bram_re,
-  output [6:0]  io_bram_raddr,
-  input  [31:0] io_bram_rdata_b,
-  output        io_bram_we,
-  output [6:0]  io_bram_waddr,
-  output [31:0] io_bram_wdata_a
+  output [31:0] io_rdata
 );
 
-  reg  [15:0] addr;
-  reg  [31:0] wdata;
-  reg         write;
-  reg  [1:0]  state;
-  wire        _GEN = state == 2'h0;
-  wire        _GEN_0 = state == 2'h1;
-  wire        _GEN_1 = _GEN | _GEN_0;
+  reg [31:0] regOfVec_0;
+  reg [31:0] regOfVec_1;
+  reg [31:0] regOfVec_2;
+  reg [31:0] regOfVec_3;
+  reg [31:0] regOfVec_4;
+  reg [31:0] regOfVec_5;
+  reg [31:0] regOfVec_6;
+  reg [31:0] regOfVec_7;
+  reg [31:0] regOfVec_8;
+  reg [31:0] regOfVec_9;
+  reg [31:0] regOfVec_10;
+  reg [31:0] regOfVec_11;
+  reg [31:0] regOfVec_12;
+  reg [31:0] regOfVec_13;
+  reg [31:0] regOfVec_14;
+  reg [31:0] regOfVec_15;
+  reg [31:0] regOfVec_16;
+  reg [31:0] regOfVec_17;
+  reg [31:0] regOfVec_18;
+  reg [31:0] regOfVec_19;
+  reg [31:0] regOfVec_20;
+  reg [31:0] regOfVec_21;
+  reg [31:0] regOfVec_22;
+  reg [31:0] regOfVec_23;
+  reg [31:0] regOfVec_24;
+  reg [31:0] regOfVec_25;
+  reg [31:0] regOfVec_26;
+  reg [31:0] regOfVec_27;
+  reg [31:0] regOfVec_28;
+  reg [31:0] regOfVec_29;
+  reg [31:0] regOfVec_30;
+  reg [31:0] regOfVec_31;
+  reg [31:0] regOfVec_32;
+  reg [31:0] regOfVec_33;
+  reg [31:0] regOfVec_34;
+  reg [31:0] regOfVec_35;
+  reg [31:0] regOfVec_36;
+  reg [31:0] regOfVec_37;
+  reg [31:0] regOfVec_38;
+  reg [31:0] regOfVec_39;
+  reg [31:0] regOfVec_40;
+  reg [31:0] regOfVec_41;
+  reg [31:0] regOfVec_42;
+  reg [31:0] regOfVec_43;
+  reg [31:0] regOfVec_44;
+  reg [31:0] regOfVec_45;
+  reg [31:0] regOfVec_46;
+  reg [31:0] regOfVec_47;
+  reg [31:0] regOfVec_48;
+  reg [31:0] regOfVec_49;
+  reg [31:0] regOfVec_50;
+  reg [31:0] regOfVec_51;
+  reg [31:0] regOfVec_52;
+  reg [31:0] regOfVec_53;
+  reg [31:0] regOfVec_54;
+  reg [31:0] regOfVec_55;
+  reg [31:0] regOfVec_56;
+  reg [31:0] regOfVec_57;
+  reg [31:0] regOfVec_58;
+  reg [31:0] regOfVec_59;
+  reg [31:0] regOfVec_60;
+  reg [31:0] regOfVec_61;
+  reg [31:0] regOfVec_62;
+  reg [31:0] regOfVec_63;
+  reg [31:0] regOfVec_64;
+  reg [31:0] regOfVec_65;
+  reg [31:0] regOfVec_66;
+  reg [31:0] regOfVec_67;
+  reg [31:0] regOfVec_68;
+  reg [31:0] regOfVec_69;
+  reg [31:0] regOfVec_70;
+  reg [31:0] regOfVec_71;
+  reg [31:0] regOfVec_72;
+  reg [31:0] regOfVec_73;
+  reg [31:0] regOfVec_74;
+  reg [31:0] regOfVec_75;
+  reg [31:0] regOfVec_76;
+  reg [31:0] regOfVec_77;
+  reg [31:0] regOfVec_78;
+  reg [31:0] regOfVec_79;
+  reg [31:0] regOfVec_80;
+  reg [31:0] regOfVec_81;
+  reg [31:0] regOfVec_82;
+  reg [31:0] regOfVec_83;
+  reg [31:0] regOfVec_84;
+  reg [31:0] regOfVec_85;
+  reg [31:0] regOfVec_86;
+  reg [31:0] regOfVec_87;
+  reg [31:0] regOfVec_88;
+  reg [31:0] regOfVec_89;
+  reg [31:0] regOfVec_90;
+  reg [31:0] regOfVec_91;
+  reg [31:0] regOfVec_92;
+  reg [31:0] regOfVec_93;
+  reg [31:0] regOfVec_94;
+  reg [31:0] regOfVec_95;
+  reg [31:0] regOfVec_96;
+  reg [31:0] regOfVec_97;
+  reg [31:0] regOfVec_98;
+  reg [31:0] regOfVec_99;
+  reg [31:0] regOfVec_100;
+  reg [31:0] regOfVec_101;
+  reg [31:0] regOfVec_102;
+  reg [31:0] regOfVec_103;
+  reg [31:0] regOfVec_104;
+  reg [31:0] regOfVec_105;
+  reg [31:0] regOfVec_106;
+  reg [31:0] regOfVec_107;
+  reg [31:0] regOfVec_108;
+  reg [31:0] regOfVec_109;
+  reg [31:0] regOfVec_110;
+  reg [31:0] regOfVec_111;
+  reg [31:0] regOfVec_112;
+  reg [31:0] regOfVec_113;
+  reg [31:0] regOfVec_114;
+  reg [31:0] regOfVec_115;
+  reg [31:0] regOfVec_116;
+  reg [31:0] regOfVec_117;
+  reg [31:0] regOfVec_118;
+  reg [31:0] regOfVec_119;
+  reg [31:0] regOfVec_120;
+  reg [31:0] regOfVec_121;
+  reg [31:0] regOfVec_122;
+  reg [31:0] regOfVec_123;
+  reg [31:0] regOfVec_124;
+  reg [31:0] regOfVec_125;
+  reg [31:0] regOfVec_126;
+  reg [31:0] regOfVec_127;
+  reg        write_r;
+  reg [31:0] wdata_r;
+  reg [6:0]  addr_r;
+  reg [31:0] rdata_r;
+  reg [1:0]  state;
   always @(posedge clock) begin
+    automatic logic _GEN;
+    automatic logic _GEN_0;
+    automatic logic _GEN_1;
+    automatic logic _GEN_2;
+    _GEN = state == 2'h0;
+    _GEN_0 = state == 2'h1;
+    _GEN_1 = state == 2'h2;
+    _GEN_2 = _GEN | _GEN_0;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h0)) begin
+    end
+    else
+      regOfVec_0 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1)) begin
+    end
+    else
+      regOfVec_1 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2)) begin
+    end
+    else
+      regOfVec_2 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3)) begin
+    end
+    else
+      regOfVec_3 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4)) begin
+    end
+    else
+      regOfVec_4 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5)) begin
+    end
+    else
+      regOfVec_5 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6)) begin
+    end
+    else
+      regOfVec_6 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h7)) begin
+    end
+    else
+      regOfVec_7 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h8)) begin
+    end
+    else
+      regOfVec_8 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h9)) begin
+    end
+    else
+      regOfVec_9 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'hA)) begin
+    end
+    else
+      regOfVec_10 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'hB)) begin
+    end
+    else
+      regOfVec_11 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'hC)) begin
+    end
+    else
+      regOfVec_12 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'hD)) begin
+    end
+    else
+      regOfVec_13 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'hE)) begin
+    end
+    else
+      regOfVec_14 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'hF)) begin
+    end
+    else
+      regOfVec_15 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h10)) begin
+    end
+    else
+      regOfVec_16 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h11)) begin
+    end
+    else
+      regOfVec_17 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h12)) begin
+    end
+    else
+      regOfVec_18 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h13)) begin
+    end
+    else
+      regOfVec_19 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h14)) begin
+    end
+    else
+      regOfVec_20 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h15)) begin
+    end
+    else
+      regOfVec_21 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h16)) begin
+    end
+    else
+      regOfVec_22 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h17)) begin
+    end
+    else
+      regOfVec_23 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h18)) begin
+    end
+    else
+      regOfVec_24 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h19)) begin
+    end
+    else
+      regOfVec_25 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1A)) begin
+    end
+    else
+      regOfVec_26 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1B)) begin
+    end
+    else
+      regOfVec_27 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1C)) begin
+    end
+    else
+      regOfVec_28 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1D)) begin
+    end
+    else
+      regOfVec_29 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1E)) begin
+    end
+    else
+      regOfVec_30 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h1F)) begin
+    end
+    else
+      regOfVec_31 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h20)) begin
+    end
+    else
+      regOfVec_32 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h21)) begin
+    end
+    else
+      regOfVec_33 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h22)) begin
+    end
+    else
+      regOfVec_34 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h23)) begin
+    end
+    else
+      regOfVec_35 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h24)) begin
+    end
+    else
+      regOfVec_36 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h25)) begin
+    end
+    else
+      regOfVec_37 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h26)) begin
+    end
+    else
+      regOfVec_38 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h27)) begin
+    end
+    else
+      regOfVec_39 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h28)) begin
+    end
+    else
+      regOfVec_40 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h29)) begin
+    end
+    else
+      regOfVec_41 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2A)) begin
+    end
+    else
+      regOfVec_42 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2B)) begin
+    end
+    else
+      regOfVec_43 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2C)) begin
+    end
+    else
+      regOfVec_44 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2D)) begin
+    end
+    else
+      regOfVec_45 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2E)) begin
+    end
+    else
+      regOfVec_46 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h2F)) begin
+    end
+    else
+      regOfVec_47 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h30)) begin
+    end
+    else
+      regOfVec_48 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h31)) begin
+    end
+    else
+      regOfVec_49 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h32)) begin
+    end
+    else
+      regOfVec_50 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h33)) begin
+    end
+    else
+      regOfVec_51 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h34)) begin
+    end
+    else
+      regOfVec_52 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h35)) begin
+    end
+    else
+      regOfVec_53 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h36)) begin
+    end
+    else
+      regOfVec_54 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h37)) begin
+    end
+    else
+      regOfVec_55 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h38)) begin
+    end
+    else
+      regOfVec_56 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h39)) begin
+    end
+    else
+      regOfVec_57 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3A)) begin
+    end
+    else
+      regOfVec_58 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3B)) begin
+    end
+    else
+      regOfVec_59 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3C)) begin
+    end
+    else
+      regOfVec_60 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3D)) begin
+    end
+    else
+      regOfVec_61 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3E)) begin
+    end
+    else
+      regOfVec_62 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h3F)) begin
+    end
+    else
+      regOfVec_63 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h40)) begin
+    end
+    else
+      regOfVec_64 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h41)) begin
+    end
+    else
+      regOfVec_65 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h42)) begin
+    end
+    else
+      regOfVec_66 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h43)) begin
+    end
+    else
+      regOfVec_67 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h44)) begin
+    end
+    else
+      regOfVec_68 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h45)) begin
+    end
+    else
+      regOfVec_69 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h46)) begin
+    end
+    else
+      regOfVec_70 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h47)) begin
+    end
+    else
+      regOfVec_71 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h48)) begin
+    end
+    else
+      regOfVec_72 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h49)) begin
+    end
+    else
+      regOfVec_73 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4A)) begin
+    end
+    else
+      regOfVec_74 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4B)) begin
+    end
+    else
+      regOfVec_75 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4C)) begin
+    end
+    else
+      regOfVec_76 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4D)) begin
+    end
+    else
+      regOfVec_77 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4E)) begin
+    end
+    else
+      regOfVec_78 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h4F)) begin
+    end
+    else
+      regOfVec_79 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h50)) begin
+    end
+    else
+      regOfVec_80 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h51)) begin
+    end
+    else
+      regOfVec_81 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h52)) begin
+    end
+    else
+      regOfVec_82 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h53)) begin
+    end
+    else
+      regOfVec_83 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h54)) begin
+    end
+    else
+      regOfVec_84 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h55)) begin
+    end
+    else
+      regOfVec_85 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h56)) begin
+    end
+    else
+      regOfVec_86 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h57)) begin
+    end
+    else
+      regOfVec_87 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h58)) begin
+    end
+    else
+      regOfVec_88 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h59)) begin
+    end
+    else
+      regOfVec_89 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5A)) begin
+    end
+    else
+      regOfVec_90 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5B)) begin
+    end
+    else
+      regOfVec_91 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5C)) begin
+    end
+    else
+      regOfVec_92 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5D)) begin
+    end
+    else
+      regOfVec_93 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5E)) begin
+    end
+    else
+      regOfVec_94 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h5F)) begin
+    end
+    else
+      regOfVec_95 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h60)) begin
+    end
+    else
+      regOfVec_96 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h61)) begin
+    end
+    else
+      regOfVec_97 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h62)) begin
+    end
+    else
+      regOfVec_98 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h63)) begin
+    end
+    else
+      regOfVec_99 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h64)) begin
+    end
+    else
+      regOfVec_100 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h65)) begin
+    end
+    else
+      regOfVec_101 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h66)) begin
+    end
+    else
+      regOfVec_102 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h67)) begin
+    end
+    else
+      regOfVec_103 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h68)) begin
+    end
+    else
+      regOfVec_104 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h69)) begin
+    end
+    else
+      regOfVec_105 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6A)) begin
+    end
+    else
+      regOfVec_106 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6B)) begin
+    end
+    else
+      regOfVec_107 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6C)) begin
+    end
+    else
+      regOfVec_108 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6D)) begin
+    end
+    else
+      regOfVec_109 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6E)) begin
+    end
+    else
+      regOfVec_110 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h6F)) begin
+    end
+    else
+      regOfVec_111 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h70)) begin
+    end
+    else
+      regOfVec_112 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h71)) begin
+    end
+    else
+      regOfVec_113 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h72)) begin
+    end
+    else
+      regOfVec_114 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h73)) begin
+    end
+    else
+      regOfVec_115 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h74)) begin
+    end
+    else
+      regOfVec_116 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h75)) begin
+    end
+    else
+      regOfVec_117 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h76)) begin
+    end
+    else
+      regOfVec_118 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h77)) begin
+    end
+    else
+      regOfVec_119 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h78)) begin
+    end
+    else
+      regOfVec_120 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h79)) begin
+    end
+    else
+      regOfVec_121 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h7A)) begin
+    end
+    else
+      regOfVec_122 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h7B)) begin
+    end
+    else
+      regOfVec_123 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h7C)) begin
+    end
+    else
+      regOfVec_124 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h7D)) begin
+    end
+    else
+      regOfVec_125 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & addr_r == 7'h7E)) begin
+    end
+    else
+      regOfVec_126 <= wdata_r;
+    if (_GEN_2 | ~(_GEN_1 & write_r & (&addr_r))) begin
+    end
+    else
+      regOfVec_127 <= wdata_r;
     if (reset) begin
-      addr <= 16'h0;
-      wdata <= 32'h0;
-      write <= 1'h0;
+      write_r <= 1'h0;
+      wdata_r <= 32'h0;
+      addr_r <= 7'h0;
+      rdata_r <= 32'h0;
       state <= 2'h0;
     end
     else begin
-      automatic logic [3:0][1:0] _GEN_2 =
+      automatic logic [3:0][1:0] _GEN_3 =
         {{state}, {io_enable ? 2'h2 : {1'h0, io_sel}}, {2'h2}, {io_sel ? 2'h1 : state}};
       if (_GEN | ~_GEN_0) begin
       end
       else begin
-        addr <= io_addr;
-        wdata <= io_wdata;
-        write <= io_write;
+        write_r <= io_write;
+        wdata_r <= io_wdata;
+        addr_r <= io_addr[6:0];
       end
-      state <= _GEN_2[state];
+      if (_GEN_2 | ~_GEN_1 | write_r) begin
+      end
+      else begin
+        automatic logic [127:0][31:0] _GEN_4 =
+          {{regOfVec_127},
+           {regOfVec_126},
+           {regOfVec_125},
+           {regOfVec_124},
+           {regOfVec_123},
+           {regOfVec_122},
+           {regOfVec_121},
+           {regOfVec_120},
+           {regOfVec_119},
+           {regOfVec_118},
+           {regOfVec_117},
+           {regOfVec_116},
+           {regOfVec_115},
+           {regOfVec_114},
+           {regOfVec_113},
+           {regOfVec_112},
+           {regOfVec_111},
+           {regOfVec_110},
+           {regOfVec_109},
+           {regOfVec_108},
+           {regOfVec_107},
+           {regOfVec_106},
+           {regOfVec_105},
+           {regOfVec_104},
+           {regOfVec_103},
+           {regOfVec_102},
+           {regOfVec_101},
+           {regOfVec_100},
+           {regOfVec_99},
+           {regOfVec_98},
+           {regOfVec_97},
+           {regOfVec_96},
+           {regOfVec_95},
+           {regOfVec_94},
+           {regOfVec_93},
+           {regOfVec_92},
+           {regOfVec_91},
+           {regOfVec_90},
+           {regOfVec_89},
+           {regOfVec_88},
+           {regOfVec_87},
+           {regOfVec_86},
+           {regOfVec_85},
+           {regOfVec_84},
+           {regOfVec_83},
+           {regOfVec_82},
+           {regOfVec_81},
+           {regOfVec_80},
+           {regOfVec_79},
+           {regOfVec_78},
+           {regOfVec_77},
+           {regOfVec_76},
+           {regOfVec_75},
+           {regOfVec_74},
+           {regOfVec_73},
+           {regOfVec_72},
+           {regOfVec_71},
+           {regOfVec_70},
+           {regOfVec_69},
+           {regOfVec_68},
+           {regOfVec_67},
+           {regOfVec_66},
+           {regOfVec_65},
+           {regOfVec_64},
+           {regOfVec_63},
+           {regOfVec_62},
+           {regOfVec_61},
+           {regOfVec_60},
+           {regOfVec_59},
+           {regOfVec_58},
+           {regOfVec_57},
+           {regOfVec_56},
+           {regOfVec_55},
+           {regOfVec_54},
+           {regOfVec_53},
+           {regOfVec_52},
+           {regOfVec_51},
+           {regOfVec_50},
+           {regOfVec_49},
+           {regOfVec_48},
+           {regOfVec_47},
+           {regOfVec_46},
+           {regOfVec_45},
+           {regOfVec_44},
+           {regOfVec_43},
+           {regOfVec_42},
+           {regOfVec_41},
+           {regOfVec_40},
+           {regOfVec_39},
+           {regOfVec_38},
+           {regOfVec_37},
+           {regOfVec_36},
+           {regOfVec_35},
+           {regOfVec_34},
+           {regOfVec_33},
+           {regOfVec_32},
+           {regOfVec_31},
+           {regOfVec_30},
+           {regOfVec_29},
+           {regOfVec_28},
+           {regOfVec_27},
+           {regOfVec_26},
+           {regOfVec_25},
+           {regOfVec_24},
+           {regOfVec_23},
+           {regOfVec_22},
+           {regOfVec_21},
+           {regOfVec_20},
+           {regOfVec_19},
+           {regOfVec_18},
+           {regOfVec_17},
+           {regOfVec_16},
+           {regOfVec_15},
+           {regOfVec_14},
+           {regOfVec_13},
+           {regOfVec_12},
+           {regOfVec_11},
+           {regOfVec_10},
+           {regOfVec_9},
+           {regOfVec_8},
+           {regOfVec_7},
+           {regOfVec_6},
+           {regOfVec_5},
+           {regOfVec_4},
+           {regOfVec_3},
+           {regOfVec_2},
+           {regOfVec_1},
+           {regOfVec_0}};
+        rdata_r <= _GEN_4[addr_r];
+      end
+      state <= _GEN_3[state];
     end
   end // always @(posedge)
-  assign io_ready = _GEN_1 | state != 2'h2;
-  assign io_rdata = io_bram_rdata_b;
-  assign io_bram_re = ~write;
-  assign io_bram_raddr = addr[6:0];
-  assign io_bram_we = ~_GEN_1 & state == 2'h2 & write;
-  assign io_bram_waddr = addr[6:0];
-  assign io_bram_wdata_a = wdata;
+  assign io_ready = state != 2'h2;
+  assign io_rdata = rdata_r;
 endmodule
 
 module apb_slave_memory(
@@ -66,38 +836,16 @@ module apb_slave_memory(
   output        io_apbSlave_0_PSLVERROR
 );
 
-  wire [31:0] _bram_test_rdata_b;
-  wire        _impl_io_bram_re;
-  wire [6:0]  _impl_io_bram_raddr;
-  wire        _impl_io_bram_we;
-  wire [6:0]  _impl_io_bram_waddr;
-  wire [31:0] _impl_io_bram_wdata_a;
   ApbSlaveMemory impl (
-    .clock           (clock),
-    .reset           (reset),
-    .io_addr         (io_apbSlave_0_PADDR),
-    .io_sel          (io_apbSlave_0_PSEL),
-    .io_enable       (io_apbSlave_0_PENABLE),
-    .io_write        (io_apbSlave_0_PWRITE),
-    .io_wdata        (io_apbSlave_0_PWDATA),
-    .io_ready        (io_apbSlave_0_PREADY),
-    .io_rdata        (io_apbSlave_0_PRDATA),
-    .io_bram_re      (_impl_io_bram_re),
-    .io_bram_raddr   (_impl_io_bram_raddr),
-    .io_bram_rdata_b (_bram_test_rdata_b),
-    .io_bram_we      (_impl_io_bram_we),
-    .io_bram_waddr   (_impl_io_bram_waddr),
-    .io_bram_wdata_a (_impl_io_bram_wdata_a)
-  );
-  bram bram_test (
-    .clk     (clock),
-    .reset   (reset),
-    .re      (_impl_io_bram_re),
-    .raddr   (_impl_io_bram_raddr),
-    .rdata_b (_bram_test_rdata_b),
-    .we      (_impl_io_bram_we),
-    .waddr   (_impl_io_bram_waddr),
-    .wdata_a (_impl_io_bram_wdata_a)
+    .clock     (clock),
+    .reset     (reset),
+    .io_addr   (io_apbSlave_0_PADDR),
+    .io_sel    (io_apbSlave_0_PSEL),
+    .io_enable (io_apbSlave_0_PENABLE),
+    .io_write  (io_apbSlave_0_PWRITE),
+    .io_wdata  (io_apbSlave_0_PWDATA),
+    .io_ready  (io_apbSlave_0_PREADY),
+    .io_rdata  (io_apbSlave_0_PRDATA)
   );
   assign io_apbSlave_0_PSLVERROR = 1'h0;
 endmodule

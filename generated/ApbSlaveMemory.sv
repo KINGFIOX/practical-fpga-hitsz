@@ -9,48 +9,18 @@ module ApbSlaveMemory(
   input  [31:0] io_wdata,
   output        io_ready,
   output [31:0] io_rdata,
-  output        io_error,
-                io_bram_re,
-  output [6:0]  io_bram_raddr,
-  input  [31:0] io_bram_rdata_b,
-  output        io_bram_we,
-  output [6:0]  io_bram_waddr,
-  output [31:0] io_bram_wdata_a
+  output        io_error
 );
 
-  reg  [15:0] addr;
-  reg  [31:0] wdata;
-  reg         write;
-  reg  [1:0]  state;
-  wire        _GEN = state == 2'h0;
-  wire        _GEN_0 = state == 2'h1;
+  reg [31:0] reg_0;
   always @(posedge clock) begin
-    if (reset) begin
-      addr <= 16'h0;
-      wdata <= 32'h0;
-      write <= 1'h0;
-      state <= 2'h0;
-    end
-    else begin
-      automatic logic [3:0][1:0] _GEN_1 =
-        {{state}, {io_enable ? 2'h2 : {1'h0, io_sel}}, {2'h2}, {io_sel ? 2'h1 : state}};
-      if (_GEN | ~_GEN_0) begin
-      end
-      else begin
-        addr <= io_addr;
-        wdata <= io_wdata;
-        write <= io_write;
-      end
-      state <= _GEN_1[state];
-    end
+    if (reset)
+      reg_0 <= 32'h0;
+    else if (io_write)
+      reg_0 <= io_wdata;
   end // always @(posedge)
-  assign io_ready = _GEN | _GEN_0 | state != 2'h2;
-  assign io_rdata = io_bram_rdata_b;
+  assign io_ready = 1'h1;
+  assign io_rdata = reg_0;
   assign io_error = 1'h0;
-  assign io_bram_re = ~write;
-  assign io_bram_raddr = addr[6:0];
-  assign io_bram_we = write;
-  assign io_bram_waddr = addr[6:0];
-  assign io_bram_wdata_a = wdata;
 endmodule
 

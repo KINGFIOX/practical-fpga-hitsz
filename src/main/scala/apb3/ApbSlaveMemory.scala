@@ -4,6 +4,8 @@ package apb3
 
 import chisel3._
 import chisel3.util._
+import os.write
+import apb3.ApbSlaveMemoryEnum.IDLE
 
 object ApbSlaveMemoryEnum extends ChiselEnum {
   val IDLE, SETUP, ACCESS = Value
@@ -20,60 +22,51 @@ class ApbSlaveMemory extends Module {
     val rdata = Output(UInt(32.W))
     val error = Output(Bool())
 
-    // bram
-    val bram = Flipped(new BramBundle)
   })
 
-  io.ready := true.B
-  io.error := false.B
-
-  val addr = RegInit(0.U(16.W))
-  val wdata = RegInit(0.U(32.W))
-  val write = RegInit(false.B)
-
-  // write
-  io.bram.we := false.B
-  io.bram.waddr := addr
-  io.bram.wdata_a := wdata
-
-  // read
-  io.bram.re := !write
-  io.bram.raddr := addr
-  io.rdata := io.bram.rdata_b
+  // hold the value of addr, write, wdata, and rdata
 
   val state = RegInit(ApbSlaveMemoryEnum.IDLE)
 
-  switch(state) {
-    is(ApbSlaveMemoryEnum.IDLE) {
-      when(io.sel) { // 当需要传输时, 总线进入 setup 状态, 此时 sel 置位
-        state := ApbSlaveMemoryEnum.SETUP
-      }
-    }
-    is(ApbSlaveMemoryEnum.SETUP) { // 总线只在一个时钟周期内保持在 setup 状态, 并且总是在时钟的下一个上升沿移动到 Access 状态
-      state := ApbSlaveMemoryEnum.ACCESS
-      // addr, write, sel, wdata 在 setup -> access 转换期间必须保持稳定
-      addr := io.addr
-      write := io.write
-      wdata := io.wdata
+  // the next logic
+  val state_next = MuxCase(
+    ApbSlaveMemoryEnum.IDLE,
+    Seq(
+      (state === ApbSlaveMemoryEnum.IDLE) -> Mux(
+        io.sel && !io.enable,
+        ApbSlaveMemoryEnum.SETUP,
+        ApbSlaveMemoryEnum.IDLE
+      ),
+      (state === ApbSlaveMemoryEnum.SETUP) -> ApbSlaveMemoryEnum.ACCESS,
+      (state === ApbSlaveMemoryEnum.ACCESS) -> Mux(
+        io.sel,
+        Mux(io.enable, ApbSlaveMemoryEnum.ACCESS, ApbSlaveMemoryEnum.SETUP),
+        ApbSlaveMemoryEnum.IDLE
+      )
+    )
+  )
+  state := state_next
 
-      // jump to access state, ready is low
-    }
-    is(ApbSlaveMemoryEnum.ACCESS) {
-      io.ready := false.B // 从设备保持为低电平, 则外围总线保持 access 状态
+  // ready logic
+  // io.ready := MuxCase(
+  //   io.write,
+  //   Seq(
+  //     (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.IDLE) -> io.write,
+  //     (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.ACCESS) -> !io.write,
+  //     (state === ApbSlaveMemoryEnum.ACCESS && state_next === ApbSlaveMemoryEnum.SETUP) -> io.write
+  //   )
+  // )
+  io.ready := true.B
 
-      io.bram.we := write
+  // error logic (ignore)
+  io.error := false.B
 
-      when(io.enable) { // enable 高电平时, 延长传输, 确保两个周期以上的传输可以顺利进行
-        state := ApbSlaveMemoryEnum.ACCESS
-      }.otherwise {
-        when(!io.sel) {
-          state := ApbSlaveMemoryEnum.IDLE
-        }.otherwise {
-          state := ApbSlaveMemoryEnum.SETUP
-        }
-      }
-    }
+  val reg = RegInit(0.U(32.W))
+
+  when(io.write) {
+    reg := io.wdata
   }
+  io.rdata := reg
 
 }
 

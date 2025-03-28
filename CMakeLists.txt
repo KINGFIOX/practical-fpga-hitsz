@@ -20,5 +20,5 @@ add_executable(sim "src/test/cxx/main.cxx")
 
 # Add the Verilated circuit to the target
 verilate(sim COVERAGE TRACE OPT_FAST
-  VERILATOR_ARGS -Wall -Wno-UNUSEDSIGNAL
+  VERILATOR_ARGS -Wall -Wno-UNUSEDSIGNAL -Wno-DECLFILENAME
   SOURCES "generated/ApbSlaveMemory.sv")

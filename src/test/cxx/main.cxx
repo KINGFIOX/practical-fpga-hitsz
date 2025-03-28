@@ -112,7 +112,7 @@ void read_and_write(VApbSlaveMemory *dut) {
   if (clk_time == 2 + base) {
     dut->io_enable = 1;
   }
-  if (clk_time == 3 + base) {
+  if (clk_time == 5 + base) {
     dut->io_sel = 0;
     dut->io_enable = 0;
   }
@@ -148,16 +148,6 @@ void combinational(VApbSlaveMemory *dut) {
       data[i] = random();
     }
     once = true;
-  }
-  if (dut->io_bram_re) {
-    dut->io_bram_rdata_b = data[MASK(dut->io_bram_raddr)];
-    printf("%2d: read %d from %d\n", clk_time, dut->io_bram_rdata_b,
-           MASK(dut->io_bram_raddr));
-  }
-  if (dut->io_bram_we) {
-    data[MASK(dut->io_bram_waddr)] = dut->io_bram_wdata_a;
-    printf("%2d: write %d to %d\n", clk_time, dut->io_bram_wdata_a,
-           MASK(dut->io_bram_waddr));
   }
 }
 

@@ -28,19 +28,6 @@ class TopModule extends Module {
   io.io_apbSlave_0_PRDATA := impl.io.rdata
   io.io_apbSlave_0_PSLVERROR := impl.io.error
 
-  val bram_test = Module(new Bram)
-
-  bram_test.io.reset := reset
-  bram_test.io.clk := clock
-
-  // impl.io.bram <> bram_test.io.bits
-  bram_test.io.re := impl.io.bram.re
-  bram_test.io.raddr := impl.io.bram.raddr
-  bram_test.io.we := impl.io.bram.we
-  bram_test.io.waddr := impl.io.bram.waddr
-  bram_test.io.wdata_a := impl.io.bram.wdata_a
-  impl.io.bram.rdata_b := bram_test.io.rdata_b
-
 }
 
 // _root_ disambiguates from package chisel3.util.circt if user imports chisel3.util._
