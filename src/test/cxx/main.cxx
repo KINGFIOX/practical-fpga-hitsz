@@ -1,146 +1,31 @@
-#include "VApbSlaveMemory.h"
+#include "VKeyFilter.h"
 #include "verilatedos.h"
 #include <cstdlib>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 
+#define CYCLES 200
+
 vluint64_t sim_time = 0;
 vluint64_t clk_time = 0;
 
 // ✅
-void write_without_wait(VApbSlaveMemory *dut) {
-  if (clk_time == 1) {
-    dut->io_sel = 1;
-    dut->io_write = 1;
-    dut->io_addr = random();
-    dut->io_wdata = random();
-  }
-  if (clk_time == 2) {
-    dut->io_enable = 1;
-  }
-  if (clk_time == 3) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
-    dut->io_wdata = 0;
-  }
-}
-
-// ✅
-void write_with_wait(VApbSlaveMemory *dut) {
-  if (clk_time == 1) {
-    dut->io_addr = random();
-    dut->io_write = 1;
-    dut->io_sel = 1;
-    dut->io_wdata = random();
-  }
-  if (clk_time == 2) {
-    dut->io_enable = 1;
-  }
-  if (clk_time == 5) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
-    dut->io_wdata = 0;
-  }
-}
-
-// 不确定
-void read_without_wait(VApbSlaveMemory *dut) {
+void drive(VKeyFilter *dut) {
   if (clk_time == 0) {
-    dut->io_write = 1;
+    dut->reset = 1;
   }
   if (clk_time == 1) {
-    dut->io_addr = random();
-    dut->io_write = 0;
-    dut->io_sel = 1;
+    dut->reset = 0;
   }
   if (clk_time == 2) {
-    dut->io_enable = 1;
+    dut->io_key_in = 1;
   }
-  if (clk_time == 3) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
-  }
-}
-
-void read_with_wait1(VApbSlaveMemory *dut) {
-  if (clk_time == 0) {
-    dut->io_write = 1;
-  }
-  if (clk_time == 1) {
-    dut->io_addr = random();
-    dut->io_write = 0;
-    dut->io_sel = 1;
-  }
-  if (clk_time == 2) {
-    dut->io_enable = 1;
-  }
-  if (clk_time == 5) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
+  if (clk_time == 100) {
+    dut->io_key_in = 0;
   }
 }
 
-void read_and_write(VApbSlaveMemory *dut) {
-  int addr = 2;
-  int base = 0;
-  // write
-  if (clk_time == 1 + base) {
-    dut->io_sel = 1;
-    dut->io_write = 1;
-    dut->io_addr = addr;
-    dut->io_wdata = random();
-  }
-  if (clk_time == 2 + base) {
-    dut->io_enable = 1;
-  }
-  if (clk_time == 3 + base) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
-    dut->io_wdata = 0;
-  }
-
-  // read
-  base = 40;
-  if (clk_time == 0 + base) {
-    dut->io_write = 1;
-  }
-  if (clk_time == 1 + base) {
-    dut->io_addr = addr;
-    dut->io_write = 0;
-    dut->io_sel = 1;
-  }
-  if (clk_time == 2 + base) {
-    dut->io_enable = 1;
-  }
-  if (clk_time == 5 + base) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
-  }
-}
-
-void read_with_wait2(VApbSlaveMemory *dut) {
-  if (clk_time == 0) {
-    dut->io_write = 1;
-  }
-  if (clk_time == 1) {
-    dut->io_addr = random();
-    dut->io_write = 0;
-    dut->io_sel = 1;
-  }
-  if (clk_time == 2) {
-    dut->io_enable = 1;
-  }
-  if (clk_time == 5) {
-    dut->io_sel = 0;
-    dut->io_enable = 0;
-  }
-}
-
-#define WIDTH ((1 << 7) - 1)
-
-#define MASK(x) ((x) & WIDTH)
-
-void combinational(VApbSlaveMemory *dut) {
+void combinational(VKeyFilter *dut) {
   static bool once = false;
   static vluint32_t data[1 << 7]; // (1 << 7) * 4
   if (!once) {
@@ -151,9 +36,9 @@ void combinational(VApbSlaveMemory *dut) {
   }
 }
 
-void simulate(VApbSlaveMemory *dut, VerilatedVcdC *m_trace,
-              void (*drive)(VApbSlaveMemory *)) {
-  for (int i = 0; i < 200; i++) {
+void simulate(VKeyFilter *dut, VerilatedVcdC *m_trace,
+              void (*drive)(VKeyFilter *)) {
+  for (int i = 0; i < CYCLES; i++) {
     for (int j = 0; j < 2; j++) {
       dut->clock ^= 1;
       if (j == 0) {         // posedge
@@ -170,13 +55,13 @@ void simulate(VApbSlaveMemory *dut, VerilatedVcdC *m_trace,
 
 int main(int argc, char **argv, char **env) {
   srand(time(NULL));
-  VApbSlaveMemory *dut = new VApbSlaveMemory;
+  VKeyFilter *dut = new VKeyFilter;
 
   Verilated::traceEverOn(true);
   VerilatedVcdC *m_trace = new VerilatedVcdC;
   dut->trace(m_trace, -1);
   m_trace->open("waveform.vcd");
-  simulate(dut, m_trace, read_and_write);
+  simulate(dut, m_trace, drive);
   m_trace->close();
   delete dut;
   exit(EXIT_SUCCESS);

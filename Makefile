@@ -1,7 +1,7 @@
-chisel: src/main/scala/apb3/ApbSlaveMemory.scala
-	sbt 'runMain apb3.ApbSlaveMemory'
+chisel: src/main/scala/key_filter/KeyFilter.scala
+	sbt 'runMain key_filter.KeyFilter'
 
-build: generated/ApbSlaveMemory.sv src/test/cxx/main.cxx
+build: generated/KeyFilter.sv src/test/cxx/main.cxx
 	cmake -S . -B build
 	cmake --build build
 
@@ -9,4 +9,4 @@ sim: build
 	./build/sim
 
 top:
-	sbt 'runMain apb3.TopModule'
+	sbt 'runMain key_filter.TopModule'
